@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multilingual Voice Chatbot</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      color: #2e7d32;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      height: 98vh;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      color: #1b5e20;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #google_translate_element {
+      transform: scale(0.85);
+      transform-origin: top right;
+    }
+
+    .chat-container {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(165, 214, 167, 0.3);
+    }
+
+    .chat-header {
+      background-color: #4caf50;
+      color: white;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .chat-header h3 {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    select#language {
+      background-color: rgba(63, 238, 87, 0.882);
+      color: rgb(255, 255, 255);
+      border: none;
+      padding: 0.4rem 1.5rem 0.4rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: calc(100% - 8px) center;
+      cursor: pointer;
+    }
+
+    select#language:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c8e6c9' fill-opacity='0.25' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .chat-bubble {
+      padding: 0.8rem 1rem;
+      border-radius: 16px;
+      margin: 0.3rem 0;
+      max-width: 80%;
+      word-wrap: break-word;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .user-message {
+      background-color: #4caf50;
+      align-self: flex-end;
+      text-align: right;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bot-message {
+      background-color: #f1f8e9;
+      align-self: flex-start;
+      text-align: left;
+      color: #33691e;
+      border-bottom-left-radius: 4px;
+    }
+
+    .input-area {
+      border-top: 1px solid #ddd;
+      padding: 0.75rem;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    textarea {
+      flex: 1;
+      padding: 0.75rem;
+      border: 1px solid #a5d6a7;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      resize: none;
+      min-height: 45px;
+      max-height: 120px;
+      font-family: inherit;
+    }
+
+    textarea:focus {
+      border-color: #66bb6a;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    button {
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    button i {
+      margin-right: 0.3rem;
+    }
+
+    /* Scrollbar Styling */
+    .chat-box::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-box::-webkit-scrollbar-thumb {
+      background-color: #a5d6a7;
+      border-radius: 4px;
+    }
+
+    .chat-box::-webkit-scrollbar-track {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .input-row {
+        flex-direction: column;
+      }
+      
+      .btn-group {
+        justify-content: space-between;
+      }
+      
+      button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2><i class="fas fa-globe"></i> Multilingual Voice Chatbot</h2>
+      <div id="google_translate_element"></div>
+    </div>
+
+    <div class="chat-container">
+      <div class="chat-header">
+        <h3>Chat Assistant</h3>
+        <select id="language">
+          <option value="en-US">English (US)</option>
+          <option value="hi-IN">हिन्दी (Hindi)</option>
+          <option value="ta-IN">தமிழ் (Tamil)</option>
+          <option value="mr-IN">मराठी (Marathi)</option>
+          <option value="te-IN">తెలుగు (Telugu)</option>
+          <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+          <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+          <option value="ml-IN">മലയാളം (Malayalam)</option>
+          <option value="ur-IN">اردو (Urdu)</option>
+          <option value="es-ES">Español (Spanish)</option>
+          <option value="fr-FR">Français (French)</option>
+          <option value="de-DE">Deutsch (German)</option>
+        </select>
+      </div>
+      
+      <div id="chat-response" class="chat-box"></div>
+
+      <div class="input-area">
+        <div class="input-row">
+          <textarea id="message" placeholder="Speak or type your message..."></textarea>
+          <div class="btn-group">
+            <button onclick="startVoiceRecognition()"><i class="fas fa-microphone"></i> Speak</button>
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          includedLanguages: 'en,hi,ta,mr,te,kn,gu,ml,ur,es,fr,de',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        },
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Chatbot Script - Keeping original functionality intact -->
+  <script>
+    // Auto-resize textarea as user types
+    const messageInput = document.getElementById('message');
+    messageInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight < 120) ? this.scrollHeight + 'px' : '120px';
+    });
+    
+    // Allow Enter to send message, Shift+Enter for new line
+    messageInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    function sendMessage() {
+      const message = document.getElementById("message").value;
+      const selectedLang = document.getElementById("language").value;
+      if (!message.trim()) return;
+
+      const chatBox = document.getElementById("chat-response");
+
+      const userBubble = document.createElement("div");
+      userBubble.className = "chat-bubble user-message";
+      userBubble.textContent = "🧑 " + message;
+      chatBox.appendChild(userBubble);
+
+      document.getElementById("message").value = "";
+      messageInput.style.height = 'auto';
+      
+      // Scroll to the bottom
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, language: selectedLang })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const botBubble = document.createElement("div");
+        botBubble.className = "chat-bubble bot-message";
+        botBubble.textContent = "🤖 ";
+        chatBox.appendChild(botBubble);
+        typeBotResponse(data.reply, botBubble, selectedLang);
+      });
+    }
+
+    function typeBotResponse(text, container, lang) {
+      let i = 0;
+      const speed = 30;
+
+      const interval = setInterval(() => {
+        container.textContent += text.charAt(i);
+        const chatBox = document.getElementById("chat-response");
+        chatBox.scrollTop = chatBox.scrollHeight;
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = lang;
+          speechSynthesis.speak(utterance);
+        }
+      }, speed);
+    }
+
+    function startVoiceRecognition() {
+      const selectedLang = document.getElementById("language").value;
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = selectedLang;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.start();
+
+      recognition.onstart = () => {
+        document.getElementById("message").placeholder = "🎙️ Listening...";
+      };
+
+      recognition.onresult = event => {
+        const speechResult = event.results[0][0].transcript;
+        document.getElementById("message").value = speechResult;
+        document.getElementById("message").placeholder = "Speak or type your message...";
+        sendMessage();
+      };
+
+      recognition.onerror = event => {
+        alert("Speech recognition error: " + event.error);
+        document.getElementById("message").placeholder = "Speak or type your message...";
+      };
+
+      recognition.onend = () => {
+        document.getElementById("message").placeholder = "Speak or type your message...";
+      };
+    }
+  </script>
+</body>
+</html>

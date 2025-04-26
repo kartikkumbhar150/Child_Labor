@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Match Dashboard</title>
+</head>
+<body>
+    <h2>Potential Matches for {{ name }}</h2>
+    {% if matches %}
+        <ul>
+        {% for match in matches %}
+            <li>{{ match }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matches found.</p>
+    {% endif %}
+</body>
+</html>

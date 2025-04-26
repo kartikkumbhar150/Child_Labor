@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify OTP - ChildSafe</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .verify-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      color: #004d40;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .btn {
+      width: 100%;
+      background: #004d40;
+      color: white;
+      padding: 1rem;
+      border: none;
+      font-size: 1rem;
+      border-radius: 5px;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #00796b;
+    }
+  </style>
+</head>
+<body>
+  <div class="verify-box">
+    <h2>Verify OTPs</h2>
+    <div class="form-group">
+      <label for="email-otp">Email OTP</label>
+      <input type="text" id="email-otp" class="form-control" placeholder="Enter Email OTP" />
+    </div>
+
+    <div class="form-group">
+      <label for="phone-otp">Phone OTP</label>
+      <input type="text" id="phone-otp" class="form-control" placeholder="Enter Phone OTP" />
+    </div>
+
+    <button class="btn" id="verify-btn">Verify and Create Account</button>
+  </div>
+
+  <script>
+    document.getElementById("verify-btn").addEventListener("click", async function () {
+      const emailOtp = document.getElementById("email-otp").value;
+      const phoneOtp = document.getElementById("phone-otp").value;
+      const userData = JSON.parse(localStorage.getItem("user_data") || "{}");
+
+      if (!userData.email || !userData.phone) {
+        alert("Missing data. Please sign up again.");
+        window.location.href = "signup.html";
+        return;
+      }
+
+      const payload = {
+        ...userData,
+        emailOtp,
+        phoneOtp
+      };
+
+      try {
+        const response = await fetch("http://localhost:5000/verify-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert("Account created successfully!");
+          localStorage.removeItem("user_data");
+          window.location.href = "index.html";
+        } else {
+          alert("Verification failed: " + result.message);
+        }
+      } catch (error) {
+        console.error("Verification error:", error);
+        alert("Something went wrong.");
+      }
+    });
+  </script>
+</body>
+</html>

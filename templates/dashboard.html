@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NGO Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+
+  <header class="bg-green-600 text-white shadow px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+      <h2 class="text-2xl font-bold">NGO Dashboard</h2>
+    </div>
+    <a href="/dashboard_missing" class="bg-white hover:bg-gray-100 text-green-700 font-medium px-4 py-2 rounded-lg transition shadow-sm">Lost Children</a>
+    <a href="/logout" class="bg-white hover:bg-gray-100 text-green-700 font-medium px-4 py-2 rounded-lg transition shadow-sm">Logout</a>
+    
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6">
+    <div class="mb-6 bg-white shadow-md rounded-lg p-4">
+      <h3 class="text-lg font-medium text-green-700 mb-3">Filter Cases</h3>
+      
+      <!-- Filter Bar -->
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="relative w-full md:w-1/2">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input type="text" id="searchInput" placeholder="Search by name, location or description..." class="pl-10 w-full px-4 py-2 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <select id="severityFilter" class="px-4 py-2 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white">
+            <option value="">All Severities</option>
+            <option value="0">Not a Child Labor Case</option>
+            <option value="1">Less Severe</option>
+            <option value="2">Severe</option>
+          </select>
+
+          <select id="statusFilter" class="px-4 py-2 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white">
+            <option value="">All Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="min-w-full table-auto">
+        <thead class="bg-green-600 text-white">
+          <tr>
+            <th class="py-3 px-4 text-left font-medium">ID</th>
+            <th class="py-3 px-4 text-left font-medium">Name</th>
+            <th class="py-3 px-4 text-left font-medium">Description</th>
+            <th class="py-3 px-4 text-left font-medium">Location</th>
+            <th class="py-3 px-4 text-left font-medium">Photos</th>
+            <th class="py-3 px-4 text-left font-medium">Severity</th>
+            <th class="py-3 px-4 text-left font-medium">Status</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200" id="complaintsTable">
+          {% for complaint in complaints %}
+          <tr class="hover:bg-green-50 transition"
+              data-name="{{ complaint.name|lower }}"
+              data-description="{{ complaint.description|lower }}"
+              data-location="{{ complaint.location|lower }}"
+              data-severity="{{ complaint.severity }}"
+              data-status="{{ complaint.status }}">
+            <td class="py-3 px-4 font-medium">{{ complaint.id }}</td>
+            <td class="py-3 px-4">{{ complaint.name }}</td>
+            <td class="py-3 px-4 text-gray-600">{{ complaint.description }}</td>
+            <td class="py-3 px-4">
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {{ complaint.location }}
+              </div>
+            </td>
+            <td class="py-3 px-4">
+              <div class="flex flex-wrap gap-2">
+                {% if complaint.photo1 %}
+                <img src="/{{ complaint.photo1 }}" class="w-24 h-16 object-cover rounded shadow-sm hover:opacity-90 transition">
+                {% endif %}
+                {% if complaint.photo2 %}
+                <img src="/{{ complaint.photo2 }}" class="w-24 h-16 object-cover rounded shadow-sm hover:opacity-90 transition">
+                {% endif %}
+                {% if complaint.photo3 %}
+                <img src="/{{ complaint.photo3 }}" class="w-24 h-16 object-cover rounded shadow-sm hover:opacity-90 transition">
+                {% endif %}
+                {% if complaint.photo4 %}
+                <img src="/{{ complaint.photo4 }}" class="w-24 h-16 object-cover rounded shadow-sm hover:opacity-90 transition">
+                {% endif %}
+              </div>
+            </td>
+            <td class="py-3 px-4">
+              {% if complaint.severity == 0 %}
+              <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Not a Child Labor Case</span>
+              {% elif complaint.severity == 1 %}
+              <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Less Severe</span>
+              {% elif complaint.severity == 2 %}
+              <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Severe</span>
+              {% endif %}
+            </td>
+            <td class="py-3 px-4">
+              {% if complaint.status == "Pending" %}
+              <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+                {{ complaint.status }}
+              </span>
+              {% elif complaint.status == "In Progress" %}
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                {{ complaint.status }}
+              </span>
+              {% elif complaint.status == "Resolved" %}
+              <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                {{ complaint.status }}
+              </span>
+              {% else %}
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                {{ complaint.status }}
+              </span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="mt-8 py-4 text-center text-gray-500 text-sm">
+    <p>© 2025 NGO Dashboard - Child Labor Monitoring System</p>
+  </footer>
+
+  <!-- Filter Logic Script -->
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const severityFilter = document.getElementById('severityFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const rows = document.querySelectorAll('#complaintsTable tr');
+
+    function filterTable() {
+      const search = searchInput.value.toLowerCase();
+      const severity = severityFilter.value;
+      const status = statusFilter.value;
+
+      rows.forEach(row => {
+        const name = row.dataset.name;
+        const desc = row.dataset.description;
+        const location = row.dataset.location;
+        const sev = row.dataset.severity;
+        const stat = row.dataset.status;
+
+        const matchesSearch = name.includes(search) || desc.includes(search) || location.includes(search);
+        const matchesSeverity = !severity || sev === severity;
+        const matchesStatus = !status || stat === status;
+
+        if (matchesSearch && matchesSeverity && matchesStatus) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', filterTable);
+    severityFilter.addEventListener('change', filterTable);
+    statusFilter.addEventListener('change', filterTable);
+  </script>
+
+</body>
+</html>

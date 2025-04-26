@@ -1,0 +1,108 @@
+<!-- templates/signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        header, footer {
+            background-color: #00463e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #00463e;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[name="registration"],
+        input[name="phone"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: #00463e;
+            color: white;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #006d5b;
+        }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer-link a {
+            color: #00463e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NGO Sign Up</h1>
+    </header>
+
+    <div class="form-container">
+        <h2>Create an Account</h2>
+        <form method="post">
+            <input type="text" name="name" placeholder="Enter Full Name" required>
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="text" name="registration" placeholder="NGO Registration Number" required>
+            <input type="text" name="phone" placeholder="Enter Phone Number" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="footer-link">
+            <p>Already registered? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&nbsp;</p>
+    </footer>
+
+</body>
+</html>

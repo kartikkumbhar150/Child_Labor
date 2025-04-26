@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChildSafe - Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Reset and Fonts */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1rem;
+}
+
+
+
+/* Header */
+.page-header {
+    background: #e0f2f1;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: #004d40;
+}
+
+.page-header p {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 2rem 0;
+}
+
+.contact-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.contact-info,
+.contact-form {
+    flex: 1;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info h2,
+.contact-form h2 {
+    margin-bottom: 1rem;
+    color: #004d40;
+}
+
+.info-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.info-item i {
+    font-size: 1.2rem;
+    color: #004d40;
+}
+
+.info-content h3 {
+    margin-bottom: 0.3rem;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+    color: #004d40;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea.form-control {
+    resize: vertical;
+    height: 120px;
+}
+
+.btn {
+    padding: 0.7rem 1.5rem;
+    background-color: #004d40;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Map Section */
+.map-section {
+    padding: 2rem 0;
+    background-color: #fff;
+}
+
+.map-placeholder {
+    background: #e0f7fa;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    color: #00796b;
+}
+
+.map-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+    background: #004d40;
+    color: #fff;
+    padding: 2rem 1rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer-column h3 {
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-form input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.footer-form button {
+    padding: 0.6rem 1rem;
+    background-color: #009688;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer .social-links a {
+    margin-right: 1rem;
+    color: #fff;
+}
+
+footer .copyright {
+    margin-top: 1rem;
+    text-align: center;
+}
+/* Styling for details and summary */
+details {
+    background: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+summary {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #004d40;
+    cursor: pointer;
+    padding: 0.5rem;
+    border: none;
+    background-color: #e0f2f1;
+    border-radius: 5px;
+    display: flex;
+    
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+summary:hover {
+    background-color: #b2dfdb;
+}
+
+summary::-webkit-details-marker {
+    display: none; /* Removes the default triangle */
+}
+
+/* Optional: Add an icon to the summary */
+summary::before {
+    content: '\f078'; /* Font Awesome down arrow icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 10px;
+    align-content: flex-start;
+}
+
+details[open] summary::before {
+    content: '\f077'; /* Font Awesome up arrow icon */
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-container,
+    .footer-content {
+        flex-direction: column;
+    }
+
+    
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .page-header p {
+        font-size: 0.9rem;
+    }
+}
+      /* Navbar Styles */
+      .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #004d40;
+  color: white;
+  padding: 15px 20px;
+  flex-wrap: wrap;
+}
+
+.navbar-logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+.hamburger {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-links.show {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: 10px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+
+  .hamburger {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: white;
+}
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-links.show {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: 10px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">ChildSafe</div>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="navbar-links" id="navbarLinks">
+          <a href="index.html">Home</a>
+          <a href="complain">Report</a>
+          <a href="donation">Donate</a>
+          <a href="contact">Contact</a>
+          <a href="ngo_login" class="active">NGOs Login</a>
+        </div>
+      </nav>
+
+   
+    <!-- Main Content -->
+    <main>
+        <div class="page-header">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>Have questions or need assistance? We're here to help.</p>
+            </div>
+        </div>
+        
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-container">
+                    <div class="contact-info animate-fadeIn">
+                        <h2>Get in Touch</h2>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="info-content">
+                                <h3>Address</h3>
+                                <p>123 NGO Street, Civic Center, New Delhi, 110001, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="info-content">
+                                <h3>Phone</h3>
+                                <p>+91 11 2345 6789</p>
+                                <p>Toll Free: 1800 123 4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info-content">
+                                <h3>Email</h3>
+                                <p>info@childsafe.org</p>
+                                <p>report@childsafe.org</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="info-content">
+                                <h3>Working Hours</h3>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                <p>Helpline: 24/7</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form animate-fadeIn">
+                        <h2>Send Us a Message</h2>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" class="form-control" placeholder="Subject" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" placeholder="Your Message" required></textarea>
+                            </div>
+                             <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="map-section">
+            <div class="container">
+                <h2 class="section-title">Our Location</h2>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Interactive Map Would Be Displayed Here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <details>
+                        <summary>How can I report a child labor case?</summary>
+                        <p>You can report a child labor case through our "Report Case" section on the website. Fill out the form with as much detail as possible, and our team will follow up promptly. You can also call our helpline at 1800 123 4567.</p>
+                    </details>
+                    
+                    <details>
+                        <summary>How can I volunteer with ChildSafe?</summary>
+                        <p>We welcome volunteers who are passionate about ending child labor. Please send us a message through our contact form specifying your interest in volunteering, and our team will get in touch with you about current opportunities.</p>
+                    </details>
+                    
+                    <details>
+                        <summary>How are my donations used?</summary>
+                        <p>Your donations directly support our rescue operations, rehabilitation programs, education initiatives, and awareness campaigns. We ensure transparency in our financial reports, which are available on request.</p>
+                    </details>
+                    
+                    <details>
+                        <summary>Does ChildSafe partner with other organizations?</summary>
+                        <p>Yes, we collaborate with various NGOs, government agencies, and international organizations to maximize our impact. If you represent an organization interested in partnership, please contact us through the form above.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>ChildSafe is dedicated to the elimination of child labor through awareness, advocacy, and action. We work with communities, governments, and organizations to create lasting change.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="complain.html">Report Case</a></li>
+                        <li><a href="donation.html">Donation</a></li>
+                        <li><a href="ngo-login.html">NGO Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 NGO Street, Civic Center, New Delhi, 110001</p>
+                    <p><i class="fas fa-phone-alt"></i> +91 11 2345 6789</p>
+                    <p><i class="fas fa-envelope"></i> info@childsafe.org</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates and news about our work and impact.</p>
+                    <form class="footer-form">
+                        <input type="email" placeholder="Your Email Address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 ChildSafe. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Add event listener for form submission
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+    
+            // Show the alert that the message has been sent
+            alert("Your message has been sent. Thank you for contacting us!");
+    
+            // Optionally, reset the form after submission
+            document.getElementById("contact-form").reset();
+        });
+        function toggleMenu() {
+          document.getElementById("navbarLinks").classList.toggle("show");
+        }
+    
+
+    </script>
+</body>
+</html>

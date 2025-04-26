@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChildSafe - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #004d40;
+      padding: 1rem 0;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .nav-links a.active {
+      border-bottom: 2px solid #fff;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: #e0f2f1;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      color: #004d40;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #333;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Sections */
+    .section {
+      padding: 3rem 1rem;
+      background-color: #fff;
+    }
+
+    .section.dark {
+      background-color: #e0f2f1;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #004d40;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* News Section */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .news-card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .news-content h3 {
+      margin-top: 1rem;
+      color: #00796b;
+    }
+
+    .news-content p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    /* CTA / Button */
+    .btn {
+      display: inline-block;
+      background-color: #004d40;
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #004d40;
+      color: #fff;
+      padding: 2rem 1rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .footer-column h3 {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: #fff;
+    }
+
+    .footer-form input {
+      padding: 0.5rem;
+      width: 70%;
+      border: none;
+      border-radius: 3px;
+      margin-right: 0.5rem;
+    }
+
+    .footer-form button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #00695c;
+      color: #fff;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .social-links a {
+      margin-right: 1rem;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .copyright {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* Chatbot Button */
+    #chatbot-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #004d40;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
+
+    #chatbot-btn:hover {
+      background-color: #00695c;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #004d40;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo" aria-label="ChildSafe Home"><i class="fas fa-child"></i>ChildSafe</a>
+      <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="complain">Report Child Labor</a></li>
+        <li><a href="http://127.0.0.1:5003/missing">Report Missing</a></li>
+        <li><a href="donation">Donate</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="ngo-login">NGOs Login</a></li>
+        <li><a href="http://127.0.0.1:5002/admin">Admin Login</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Protecting Childhood, One Click at a Time</h1>
+    <p>Join the movement against child labor and exploitation.</p>
+    <a href="complain" class="btn">Report Now</a>
+  </section>
+
+  <section class="container">
+    <h2 class="section-title">Latest News</h2>
+    <div class="news-grid">
+      <div class="news-card">
+        <img src="static/images/child1.jpeg" alt="Policy against child labor">
+        <div class="news-content">
+          <h3>New Policy to Stop Child Labor</h3>
+          <p>Government introduces strict measures against child labor nationwide.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <img src="static/images/child 2.jpeg" alt="Rescued children">
+        <div class="news-content">
+          <h3>Rescued and Rehabilitated</h3>
+          <p>30 children rescued and admitted to care centers this month.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <img src="static/images/child3.jpeg" alt="International day against child labor">
+        <div class="news-content">
+          <h3>International Day Against Child Labor</h3>
+          <p>Communities worldwide unite to raise awareness.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <img src="static/images/child4.jpeg" alt="NGO campaign success">
+        <div class="news-content">
+          <h3>NGO Campaign Success</h3>
+          <p>Successful campaigns led to rescuing over 100 children.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <img src="static/images/child5.jpeg" alt="Education for children">
+        <div class="news-content">
+          <h3>New Educational Initiative</h3>
+          <p>Thousands of children now have access to free education programs.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <img src="static/images/child6.jpeg" alt="Community actions against child labor">
+        <div class="news-content">
+          <h3>Breaking the Chains</h3>
+          <p>Local community organizations successfully reduce child labor in rural areas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-column">
+        <h3>ChildSafe</h3>
+        <p>Protecting children's rights through awareness, action, and collaboration.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="complain">Report</a></li>
+          <li><a href="donation.html">Donate</a></li>
+          <li><a href="ngo-login">NGO Login</a></li>
+          <li><a href="ngo-login">Police Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Newsletter</h3>
+        <form class="footer-form">
+          <input type="email" placeholder="Your email" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-column">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 ChildSafe. All rights reserved.
+    </div>
+  </footer>
+
+  <button id="chatbot-btn" title="Chat with us" aria-label="Chatbot Button">💬</button>
+
+  <script>
+    document.getElementById("hamburger").addEventListener("click", () => {
+      document.getElementById("nav-links").classList.toggle("show");
+    });
+
+    document.getElementById("chatbot-btn").addEventListener("click", () => {
+      window.location.href = "http://127.0.0.1:5001";
+    });
+  </script>
+</body>
+</html>

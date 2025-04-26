@@ -1,0 +1,6 @@
+Flask
+Flask-MySQLdb
+Flask-Login
+scikit-learn
+pandas
+numpy

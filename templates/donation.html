@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChildSafe - Donate to NGOs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+
+    header {
+      background-color: #148774; /* Deep Blue */
+      color: #ffffff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .ngo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .ngo-card {
+      background-color: #f9fafb;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    .ngo-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .ngo-card img {
+  width: 100%;              /* Ensure the image takes the full width of the container */
+  height: 50%;             /* Let the height adjust based on the image's aspect ratio */
+  object-fit: cover;        /* Maintain the aspect ratio and crop if necessary */
+}
+
+
+    .ngo-content {
+      padding: 20px;
+    }
+
+    .ngo-content h3 {
+      margin-top: 0;
+      color: #004d40;
+    }
+
+    .requirements {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .requirements li {
+      margin-bottom: 5px;
+    }
+
+    .contact-info {
+      margin-top: 15px;
+      font-size: 0.95em;
+    }
+
+    .contact-info i {
+      margin-right: 8px;
+      color: #004d40;
+    }
+
+    footer {
+      background-color: #004d40;
+      color: #ffffff;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5em;
+      }
+    }
+          /* Navbar Styles */
+          .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #004d40;
+  color: white;
+  padding: 15px 20px;
+  flex-wrap: wrap;
+  position: sticky;
+}
+
+.navbar-logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+.hamburger {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-links.show {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: 10px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+
+  .hamburger {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: white;
+}
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-links.show {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: 10px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo">ChildSafe</div>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    <div class="navbar-links" id="navbarLinks">
+      <a href="index.html">Home</a>
+      <a href="complain">Report</a>
+      <a href="donation">Donate</a>
+      <a href="contact">Contact</a>
+      <a href="ngo_login" class="active">NGOs Login</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1><i class="fas fa-hand-holding-heart"></i> Donate to Support Child Welfare</h1>
+  </header>
+
+  <main class="container">
+    <div class="ngo-grid">
+      <!-- NGO 1 -->
+      <div class="ngo-card">
+        <img src="static/images/logo1.jpeg" alt="NGO 1">
+        <div class="ngo-content">
+          <h3>The Akanksha Foundation✅</h3>
+          <h4>📍Wakdewadi</h4>
+          <ul class="requirements">
+            <li>Educational Materials</li>
+            <li>Clothing (Ages 5-15)</li>
+            <li>Non-perishable Food Items</li>
+          </ul>
+          
+
+          <div class="contact-info">
+            <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> contact@hopeforchildren.org</p>
+          </div>
+          <a href="https://rzp.io/rzp/gXjNvOej" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+            Donate
+          </a>
+        </div>
+        
+      </div>
+
+      <!-- NGO 2 -->
+      <div class="ngo-card">
+        <img src="static/images/logo2.jpeg" alt="NGO 2">
+        <div class="ngo-content">
+          <h3>Sos Childrens Villages of India✅</h3>
+          <h4>📍Wakdewadi</h4>
+          <ul class="requirements">
+            <li>School Bags</li>
+            <li>Stationery Kits</li>
+            <li>Sports Equipment</li>
+          </ul>
+          <div class="contact-info">
+            <p><i class="fas fa-phone-alt"></i> +91 91234 56789</p>
+            <p><i class="fas fa-envelope"></i> support@brightfutures.in</p>
+          </div>
+          <a href="https://rzp.io/rzp/gXjNvOej" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+            Donate
+          </a>
+        </div>
+      </div>
+
+      <!-- NGO 3 -->
+      <div class="ngo-card">
+        <img src="static/images/logo3.jpeg" alt="NGO 3">
+        <div class="ngo-content">
+          <h3>Majha Ghar Foundation✅</h3>
+          <h4>📍Hinjewadi</h4>
+          <ul class="requirements">
+            <li>Medical Supplies</li>
+            <li>Hygiene Kits</li>
+            <li>Blankets</li>
+          </ul>
+          <div class="contact-info">
+            <p><i class="fas fa-phone-alt"></i> +91 99887 66554</p>
+            <p><i class="fas fa-envelope"></i> info@childcareindia.org</p>
+          </div>
+          <a href="https://rzp.io/rzp/gXjNvOej" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+            Donate
+          </a>
+        </div>
+      </div>
+
+      <!-- NGO 4 -->
+      <div class="ngo-card">
+        <img src="static/images/logo4.jpeg" alt="NGO 4">
+        <div class="ngo-content">
+          <h3>Efiling Company✅</h3>
+          <h4>📍Wagholi</h4>
+          <ul class="requirements">
+            <li>Books and Notebooks</li>
+            <li>Winter Clothing</li>
+            <li>First Aid Kits</li>
+          </ul>
+          <div class="contact-info">
+            <p><i class="fas fa-phone-alt"></i> +91 90123 45678</p>
+            <p><i class="fas fa-envelope"></i> donate@safehaven.org</p>
+          </div>
+          <a href="https://rzp.io/rzp/gXjNvOej" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+            Donate
+          </a>
+        </div>
+      </div>
+
+      <!-- NGO 5 -->
+      <div class="ngo-card">
+        <img src="static/images/logo5.jpeg" alt="NGO 4">
+        <div class="ngo-content">
+          <h3>St Crispins Home✅</h3>
+          <h4>📍 Karve Road</h4>
+          <ul class="requirements">
+            <li>Books and Notebooks</li>
+            <li>Winter Clothing</li>
+            <li>First Aid Kits</li>
+          </ul>
+          <div class="contact-info">
+            <p><i class="fas fa-phone-alt"></i> +91 90123 45678</p>
+            <p><i class="fas fa-envelope"></i> donate@safehaven.org</p>
+          </div>
+          <a href="https://rzp.io/rzp/gXjNvOej" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+            Donate
+          </a>
+        </div>
+      </div>
+      <!-- NGO 6 -->
+      <div class="ngo-card">
+        <img src="static/images/logo6.jpeg" alt="NGO 4">
+        <div class="ngo-content">
+          <h3>Ellora Medicals and Education Foundation✅</h3>
+          <h4>📍Dhankawadi</h4>
+          <ul class="requirements">
+            <li>Books and Notebooks</li>
+            <li>Winter Clothing</li>
+          
+          </ul>
+          <div class="contact-info">
+            <p><i class="fas fa-phone-alt"></i> +91 90123 45678</p>
+            <p><i class="fas fa-envelope"></i> donate@safehaven.org</p>
+          </div>
+          <a href="https://rzp.io/rzp/gXjNvOej" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+            Donate
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+      function toggleMenu() {
+          document.getElementById("navbarLinks").classList.toggle("show");
+        }
+
+  </script>
+</body></html>
